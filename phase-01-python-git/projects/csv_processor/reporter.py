@@ -57,11 +57,11 @@ class ReportGenerator:
         # ── HEADER ──────────────────────────────────────────────────────────
         lines += [
             "=" * 65,
-            "  📊  DATA PIPELINE EXECUTION REPORT",
+            "  [DATA PIPELINE EXECUTION REPORT]",
             "=" * 65,
             f"  File        : {filename}",
             f"  Run Time    : {now}",
-            f"  Status      : {'✅ SUCCESS' if validation.is_valid else '❌ FAILED'}",
+            f"  Status      : {'SUCCESS' if validation.is_valid else 'FAILED'}",
             "=" * 65,
             "",
         ]
@@ -171,7 +171,7 @@ class ReportGenerator:
                 )
 
         if not recs:
-            recs.append("Data quality looks good! No major issues detected. 🎉")
+            recs.append("Data quality looks good! No major issues detected.")
 
         return recs
 
@@ -191,7 +191,7 @@ class ReportGenerator:
         - Insert into BigQuery table
         """
         if not rows:
-            print("  ⚠️  No rows to export.")
+            print("  [WARNING] No rows to export.")
             return
 
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -201,5 +201,5 @@ class ReportGenerator:
             writer.writeheader()
             writer.writerows(rows)
 
-        print(f"  ✅ Cleaned data exported to: {output_path}")
-        print(f"  📁 Rows written: {len(rows)}")
+        print(f"  [OK] Cleaned data exported to: {output_path}")
+        print(f"  Rows written: {len(rows)}")

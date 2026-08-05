@@ -1,0 +1,26 @@
+order_id,customer_id,customer_name,product,quantity,price,order_date,region
+1001,C001,Alice Johnson,Laptop,1,75000.0,2024-01-15,North
+1002,C002,Bob Smith,Mouse,3,450.0,2024-01-15,South
+1003,C003,Carol White,Keyboard,2,1200.0,2024-01-16,East
+1004,C001,Alice Johnson,Monitor,1,15000.0,2024-01-17,North
+1005,C004,David Brown,Laptop,2,75000.0,2024-01-18,West
+1006,C005,Eve Davis,Headphones,1,3500.0,2024-01-18,South
+1007,C002,Bob Smith,Mouse,3,450.0,2024-01-15,South
+1008,C006,Frank Miller,Webcam,1,2200.0,2024-01-19,East
+1009,C007,Grace Lee,Laptop,1,75000.0,2024-01-19,North
+1010,C008,,USB Hub,2,800.0,2024-01-20,West
+1011,C009,Henry Wilson,Laptop,1,9999999.0,2024-01-20,South
+1012,C010,Isabella Clark,Mouse,,450.0,2024-01-21,North
+1013,C011,James Taylor,Keyboard,1,1200.0,2024-01-21,East
+1014,C003,Carol White,Monitor,2,15000.0,2024-01-22,East
+1015,C012,Karen Anderson,Headphones,4,3500.0,2024-01-22,West
+1016,C013,Liam Jackson,Laptop,1,75000.0,2024-01-23,North
+1017,C001,Alice Johnson,Laptop,1,75000.0,2024-01-15,North
+1018,C014,Mia Harris,Webcam,2,2200.0,2024-01-23,South
+1019,C015,Noah Martin,USB Hub,3,800.0,2024-01-24,East
+1020,C016,Olivia Thompson,Keyboard,1,1200.0,2024-01-24,West
+1021,C017,Patricia Garcia,Mouse,5,450.0,2024-01-25,North
+1022,C018,Quinn Robinson,Laptop,1,75000.0,2024-01-25,South
+1023,C019,Ryan Lewis,Monitor,1,15000.0,2024-01-26,East
+1024,C020,Sophia Walker,Headphones,2,3500.0,2024-01-26,West
+1025,,Ella Wright,Webcam,1,2200.0,,North

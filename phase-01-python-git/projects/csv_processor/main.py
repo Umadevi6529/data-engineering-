@@ -36,9 +36,16 @@ import logging
 import os
 import sys
 
+# ── Force UTF-8 output on Windows (fixes emoji/unicode in console) ───────────
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
 from processor import DataProcessor
 from reporter import ReportGenerator
 from validator import DataValidator
+
 
 
 # ─────────────────────────────────────────────────────────────
@@ -175,14 +182,14 @@ Examples:
         "--null-threshold",
         type=float,
         default=0.5,
-        help="Warn if null % in a column exceeds this fraction (default: 0.5 = 50%%)",
+        help="Warn if null fraction in a column exceeds this value (default: 0.5 = 50 percent)",
     )
 
     args = parser.parse_args()
 
     # ── STEP 1: Extract — Read CSV ──────────────────────────────────────────
     logger.info(f"Starting pipeline for: {args.file}")
-    print(f"\n🔄 Reading file: {args.file}")
+    print(f"\n[EXTRACT] Reading file: {args.file}")
     rows = read_csv(args.file)
     print(f"   Loaded {len(rows)} rows, {len(rows[0]) if rows else 0} columns")
 
@@ -196,7 +203,7 @@ Examples:
     numeric_cols  = [c.strip() for c in args.numeric_cols.split(",") if c.strip()]
 
     # ── STEP 2: Validate — Check data quality ───────────────────────────────
-    print("\n🔍 Validating data...")
+    print("\n[VALIDATE] Validating data...")
     validator = DataValidator()
     validation_result = validator.validate(
         rows=rows,
@@ -208,12 +215,12 @@ Examples:
     # Abort if validation hard-fails (e.g. required col has nulls)
     if not validation_result.is_valid:
         logger.error("Validation failed. Pipeline aborted.")
-        print("\n❌ PIPELINE ABORTED — See errors above.")
+        print("\n[FAILED] PIPELINE ABORTED -- See errors above.")
         print(validation_result.summary())
         sys.exit(1)
 
     # ── STEP 3: Transform — Process data ────────────────────────────────────
-    print("\n⚙️  Processing data...")
+    print("\n[TRANSFORM] Processing data...")
     processor = DataProcessor(schema=schema)
     processing_result = processor.process(
         rows=rows,
@@ -222,7 +229,7 @@ Examples:
     )
 
     # ── STEP 4: Load — Generate report ──────────────────────────────────────
-    print("\n📋 Generating report...")
+    print("\n[REPORT] Generating report...")
     reporter = ReportGenerator()
     report = reporter.generate(
         filename=args.file,
@@ -233,11 +240,11 @@ Examples:
 
     # ── STEP 5: (Optional) Export cleaned data ───────────────────────────────
     if args.export:
-        print(f"\n💾 Exporting cleaned data...")
+        print(f"\n[EXPORT] Exporting cleaned data...")
         reporter.export_csv(processing_result.cleaned_rows, args.export)
 
     logger.info("Pipeline completed successfully.")
-    print("\n✅ Pipeline finished.")
+    print("\n[DONE] Pipeline finished.")
 
 
 # ─────────────────────────────────────────────────────────────
